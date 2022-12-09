@@ -5,7 +5,7 @@ import com.etiya.CertificateTracker.business.abstracts.IPService;
 import com.etiya.CertificateTracker.business.requests.AddCertificateRequest;
 import com.etiya.CertificateTracker.business.requests.AddIPRequest;
 import com.etiya.CertificateTracker.business.requests.DeleteIPRequest;
-import com.etiya.CertificateTracker.core.utilities.business.BusinessRules;
+import com.etiya.CertificateTracker.core.utilities.businessRules.BusinessRules;
 import com.etiya.CertificateTracker.core.utilities.mapping.ModelMapperService;
 import com.etiya.CertificateTracker.core.utilities.results.ErrorResult;
 import com.etiya.CertificateTracker.core.utilities.results.Result;

@@ -1,4 +1,4 @@
-package com.etiya.CertificateTracker.core.utilities.business;
+package com.etiya.CertificateTracker.core.utilities.businessRules;
 
 
 import com.etiya.CertificateTracker.core.utilities.results.Result;
