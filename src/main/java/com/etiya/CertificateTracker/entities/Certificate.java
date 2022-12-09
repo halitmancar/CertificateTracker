@@ -1,5 +1,6 @@
 package com.etiya.CertificateTracker.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Certificate {
     @Column(name = "expiration_date")
     private Date expirationDate;
 
+    @JsonIgnore
     @ManyToOne (cascade = CascadeType.DETACH)
     @JoinColumn(name = "ip_id")
     private IP ip;

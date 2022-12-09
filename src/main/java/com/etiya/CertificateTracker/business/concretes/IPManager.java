@@ -4,6 +4,7 @@ import com.etiya.CertificateTracker.business.abstracts.CertificateService;
 import com.etiya.CertificateTracker.business.abstracts.IPService;
 import com.etiya.CertificateTracker.business.requests.AddCertificateRequest;
 import com.etiya.CertificateTracker.business.requests.AddIPRequest;
+import com.etiya.CertificateTracker.business.requests.DeleteIPRequest;
 import com.etiya.CertificateTracker.core.utilities.business.BusinessRules;
 import com.etiya.CertificateTracker.core.utilities.mapping.ModelMapperService;
 import com.etiya.CertificateTracker.core.utilities.results.ErrorResult;
@@ -52,12 +53,29 @@ public class IPManager implements IPService {
     }
 
     @Override
+    public Result delete(DeleteIPRequest deleteIPRequest) {
+        Result result = BusinessRules.run(checkIfIPExists(deleteIPRequest.getIpID()));
+        if (result!=null){
+            return result;
+        }
+        IP ip =modelMapperService.forRequest().map(deleteIPRequest, IP.class);
+        certificateService.deleteAllByIP(ip);
+        this.IPDao.delete(ip);
+        return new SuccessResult("IP kaydı başarıyla silindi.");
+    }
+
+    @Override
     public Result checkIfIPExists(int id) {
         if(this.IPDao.existsById(id)){
             return new SuccessResult();
         } else {
             return new ErrorResult("İlgili ID'ye kayıtlı IP bulunamadı.");
         }
+    }
+
+    @Override
+    public IP getByIpID(int ipID) {
+        return this.IPDao.getByIpID(ipID);
     }
 
     public Result checkExistingIPAddress(String ip){
